@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BLUE MOON Restaurant</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="box">
+  <h3>🍴 Restaurant Menu Calculator</h3>
+
+  <label for="item">Select Item:</label>
+  <select id="item">
+    <option value="250|Pizza">Pizza – ₹250</option>
+    <option value="120|Burger">Burger – ₹120</option>
+    <option value="180|Pasta">Pasta – ₹180</option>
+    <option value="90|French Fries">French Fries – ₹90</option>
+    <option value="200|Cold Coffee">Cold Coffee – ₹200</option>
+    <option value="400|Chicken Biryani">Chicken Biryani – ₹400</option>
+    <option value="150|Veg Fried Rice">Veg Fried Rice – ₹150</option>
+    <option value="200|Paneer Butter Masala">Paneer Butter Masala – ₹200</option>
+    <option value="130|Grilled Sandwich">Grilled Sandwich – ₹130</option>
+    <option value="160|Chocolate Brownie">Chocolate Brownie – ₹160</option>
+  </select>
+
+  <label for="quantity">Quantity:</label>
+  <input type="number" id="quantity" placeholder="Enter quantity">
+
+  <button onclick="calculateBill()">Calculate Bill</button>
+
+  <div class="result" id="orderItem">Item: </div>
+  <div class="result" id="orderQty">Quantity: </div>
+  <div class="result" id="orderPrice">Price per Item: </div>
+  <div class="result" id="totalBill">Total Bill: </div>
+</div>
+
+<script>
+function calculateBill() {
+  let itemValue = document.getElementById("item").value;
+  let parts = itemValue.split("|");
+  let price = parseFloat(parts[0]);
+  let dish = parts[1];
+  let quantity = parseInt(document.getElementById("quantity").value);
+
+  if (isNaN(quantity) || quantity <= 0) {
+    document.getElementById("orderItem").innerText = "⚠️ Please enter a valid quantity!";
+    document.getElementById("orderQty").innerText = "";
+    document.getElementById("orderPrice").innerText = "";
+    document.getElementById("totalBill").innerText = "";
+    return;
+  }
+
+  let total = price * quantity;
+
+  document.getElementById("orderItem").innerText = "Item: " + dish;
+  document.getElementById("orderQty").innerText = "Quantity: " + quantity;
+  document.getElementById("orderPrice").innerText = "Price per Item: ₹" + price;
+  document.getElementById("totalBill").innerText = "Total Bill: ₹" + total.toFixed(2);
+}
+</script>
+
+</body>
+</html>
